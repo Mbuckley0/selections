@@ -30,9 +30,9 @@ module Selections
       target_id = "#{target.to_s.singularize}_ids".to_sym
 
       if ActiveRecord::VERSION::MAJOR > 4
-        has_many target, options.reject { |k, v| [:system_code, :scopes, :predicates].include?(k) }.merge(class_name: 'Selection', primary_key: target_id, foreign_key: :id)
+        has_many target, class_name: 'Selection', primary_key: target_id, foreign_key: :id
       else
-        has_many target, options.reject { |k, v| [:system_code, :scopes, :predicates].include?(k) }.merge(class_name: self.name, primary_key: target_id, foreign_key: :id)
+        has_many target, class_name: self.name, primary_key: target_id, foreign_key: :id
       end
 
       # The "selections" table may not exist during certain rake scenarios such as db:migrate or db:reset.

@@ -28,7 +28,7 @@ module Selections
       predicates = !!options[:predicates]
       scopes = !!options[:scopes]
 
-      belongs_to target, options.reject { |k, v| [:system_code, :scopes, :predicates].include?(k) }.merge(class_name: "Selection")
+      belongs_to target, class_name: "Selection"
 
       # The "selections" table may not exist during certain rake scenarios such as db:migrate or db:reset.
       ActiveRecord::Base.connection_pool.with_connection(&:active?) rescue return
